@@ -5,14 +5,24 @@
 
 trigger:
 - master
-
 pool:
   vmImage: ubuntu-latest
-
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
+- task: BrowserStackConfig@0
+  inputs:
+    BrowserStackServiceEndPoint: 'bstack-demo'
+- task: PythonScript@0
+  inputs:
+    scriptSource: 'inline'
+    script: |
+      pip install -r requirements.txt
+      paver run parallel
+- task: BrowserStackResults@1
+  inputs:
+    browserstackProduct: 'automate'
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
