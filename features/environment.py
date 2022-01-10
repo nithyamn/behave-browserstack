@@ -37,6 +37,8 @@ def before_feature(context, feature):
     if "browserstack.local" in desired_capabilities and desired_capabilities["browserstack.local"]:
         start_local()
 
+    desired_capabilities['build'] = os.environ['BROWSERSTACK_BUILD_NAME']
+
     context.browser = webdriver.Remote(
         desired_capabilities=desired_capabilities,
         command_executor="http://%s:%s@hub.browserstack.com/wd/hub" % (BROWSERSTACK_USERNAME, BROWSERSTACK_ACCESS_KEY)
