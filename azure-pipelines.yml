@@ -14,9 +14,14 @@ steps:
 - task: BrowserStackConfig@0
   inputs:
     BrowserStackServiceEndPoint: 'bstack-demo'
-- task: PythonScript@0
+# - task: PythonScript@0
+#   inputs:
+#     scriptSource: 'inline'
+#     script: |
+#       pip install -r requirements.txt
+#       paver run parallel
+- task: CmdLine@2
   inputs:
-    scriptSource: 'inline'
     script: |
       pip install -r requirements.txt
       paver run parallel
